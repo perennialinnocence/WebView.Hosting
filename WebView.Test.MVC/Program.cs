@@ -1,7 +1,15 @@
+using WebView.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// Add WebViewerService
+builder.Services.ViewLocalWebsite(c => {
+	c.ViewMode = ViewMode.App;
+	c.ProfileDirectory = System.IO.Path.GetFullPath("bin/testprofiledirectory");
+}, typeof(Chrome));
 
 var app = builder.Build();
 
